@@ -1,0 +1,23 @@
+@{
+    ViewBag.Title = "Type Werk";
+}
+
+<h1>Tarieven</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    <p>
+        Op deze pagina kan u de Tarieven beheren. Gebruikers van de applicatie kunnen tussen deze tarieven kiezen wanneer ze een uurregistratie maken.
+        Een tarief kent onder andere
+        <ul>
+            <li>Type Werk: omschrijving van het soort geleverde werk, bijvoorbeeld 'Vertalen'</li>
+            <li>Uurwaarde: het bruto aangerekende bedrag in euro per uur</li>
+        </ul>
+    </p>
+</div>
+
+<div id="tbl_tarief"></div>
+
+@Scripts.Render("~/Scripts/uurfac/tarief.js")
+
+

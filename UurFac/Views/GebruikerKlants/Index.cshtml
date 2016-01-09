@@ -1,0 +1,38 @@
+@model UurFac.Models.GebruikerKlantViewModel
+
+@{
+    ViewBag.Title = "Gebruiker / Klanten";
+}
+
+<h1>Gebruiker / Klanten</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    <p>
+        Op deze pagina kan u Gebruikers aan Klanten koppelen. Na selectie van een departement krijg je alle gebruikers te zien die gekoppeld zijn aan dit 
+        departement. Selecteer een rij in de gebruikerstabel om de gekoppelde klanten te zien. Door in de onderste tabel op 'Toevoegen' te klikken krijg je de keuze
+        om bijkomende klanten te koppelen. Let wel: enkel klanten die ook aan het departement gekoppeld behoren tot de keuzes. <br /><br />
+
+        Koppelen van departementen kan voor
+        <ul>
+            <li>Gebruikers op Administrator > @Html.ActionLink("Gebruikers", "Index", "Gebruikers") (Enkel als Administrator)</li>
+            <li>Klanten op Klanten > @Html.ActionLink("Klanten", "Index", "Klants")</li>
+        </ul>
+    </p>
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.GekozenDepartement)
+</div>
+<div class="editor-field selDep">
+    @Html.DropDownListFor(model => model.GekozenDepartement, Model.Departementen)
+</div>  
+
+<div id="tbl_gebruikers" class="tabelOnder"></div>  
+
+<div id="tbl_klanten" class="tabelOnder"></div>  
+
+
+@Scripts.Render("~/Scripts/uurfac/gebruikerklant.js")
+
+

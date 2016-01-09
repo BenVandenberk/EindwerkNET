@@ -1,0 +1,223 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 55px;
+}
+
+h1.spacious {
+    margin-bottom: 35px;
+}
+
+footer {
+    text-align: center;
+}
+
+.wide {
+    width: 300px;
+}
+
+.formButton {
+    margin: 20px 20px 20px 0px;
+    float: right;
+}
+
+.tabelOnder {
+    margin-top: 40px;
+}
+
+.center {
+    text-align: center;
+}
+
+.top10 {
+    margin-top: 10px;
+}
+
+.bottom10 {
+    margin-bottom: 10px;
+}
+
+.right10 {
+    margin-right: 10px;
+}
+
+.clboth {
+    clear: both;
+}
+
+.factuurheader {
+    border: 1px solid black;
+    padding: 5px;
+    position: relative;
+    height: 60px;
+    font-weight: bold;
+}
+
+.right {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.header2 {
+    border: 1px solid black;
+    padding: 5px;
+    position: relative;
+    margin-top: 10px;
+    height: 130px;  
+}
+
+.header2title {
+    margin-left : 10px;
+    margin-right: 10px;    
+    margin-bottom : 15px;
+    margin-top: 10px;    
+    height: 20px;
+    text-align: center;
+}
+
+.subtitel {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.header2left {
+    position: absolute;
+    left: 10px;
+    top: 5px; 
+}
+
+.header2right {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.linelabelLeft {
+    float: left;
+    clear: both;
+}
+
+.linelabelRight {
+    float: right;
+    clear: both;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.uurregtitel {
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+label {
+    font-weight: normal;
+}
+
+.uurregbox {
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 95%;
+    display: inline-block;
+    text-align: left;
+}
+
+.ital {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.subtotaal {
+    float: right;
+    font-weight: bold;
+}
+
+.totaal {      
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.factuurtotaal {
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    height: 30px;
+    background-color: lightgray;
+}
+
+.factuurbody {
+    text-align: center;
+}
+
+ul.factuur {
+    list-style: circle;
+}
+
+ul.ui-autocomplete {
+    list-style: none;
+    padding-left: 0px;
+}
+
+#img_help:hover {
+    cursor: pointer;
+}
+
+#img_help {    
+    margin-bottom: 10px;
+}
+
+#div_help {
+    display: none;
+    margin-bottom: 10px;
+}
+
+.hide {
+    display: none;
+}

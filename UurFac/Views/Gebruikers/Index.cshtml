@@ -1,0 +1,29 @@
+@{
+    ViewBag.Title = "Gebruikers";
+}
+
+<h1>Gebruikers</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help"/>
+
+<div id="div_help">
+    <p>
+        Als administrator kan u gebruikers aanmaken en ze koppelen aan departementen. Bij het aanmaken van een gebruiker kiest u een login. Het paswoord voor deze gebruiker zal als startwaarde deze login zijn. De gebruiker kan het paswoord later zelf aanpassen.
+        Gebruikers hebben 1 van volgende 3 rollen:
+        <ul>
+            <li>Administrator: volledige rechten op alle entiteiten. Enkel een administrator kan Gebruikers, Departementen en Type Werk beheren</li>
+            <li>Departement Administrator: rechten op Klanten, Uurregistraties en Facturen van zijn/haar departement(en). Een Gebruiker met rol Departement Administrator is departement administrator voor álle departementen waaraan hij/zij gekoppeld is.</li>
+            <li>User: kan alleen uurregistraties registreren voor zichzelf, en dit enkel voor klanten waaraan hij gekoppeld is</li>
+        </ul>
+        Klik op <img src="/Content/images/list_metro.png" /> om Departementen van een gebruiker aan te passen.
+    </p>
+</div>
+
+<div id="tbl_gebruikers"></div>
+
+<div id="dialog" title="Administrator" style="display:none">
+    <p>Administrators hebben volledige rechten, op alle departementen. Departementen toevoegen is niet nodig.</p>
+</div>
+
+@Scripts.Render("~/Scripts/uurfac/gebruikers.js")
+
+

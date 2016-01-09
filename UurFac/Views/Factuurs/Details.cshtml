@@ -1,0 +1,98 @@
+@model UurFac.Models.FactuurViewModel
+    @using UurFac.Models.UurFac
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="factuurheader top10">
+    <span>Factuurnummer: @Model.Factuur.FactuurNummer</span>
+    <div class="right">
+        <span>Factuurdatum: @Model.Factuur.FactuurDatum.ToShortDateString()</span>
+        <br/>
+        <span>Factuurjaar: @Model.Factuur.FactuurJaar</span>
+    </div>
+</div>
+
+<div class="header2">  
+    
+    <div class="header2left">
+               
+        <div>
+            <div class="header2title">
+                <span class="floatLeft subtitel">Ten aanzien van:</span>                
+            </div>
+        </div>
+
+        <label class="linelabelLeft">@Model.Klant.Bedrijfsnaam [@Model.Klant.Ondernemingsnummer]</label>
+        <label class="linelabelLeft">@Model.Klant.Adres</label>
+        <label class="linelabelLeft">@Model.Klant.Postcode @Model.Klant.Plaats</label>
+    </div>
+
+    <div class="header2right">
+
+        <div>
+            <div class="header2title">
+                <span class="floatLeft subtitel">Uitgegeven door:</span>
+            </div>
+        </div>
+        
+        <label class="linelabelRight">Mijn Bedrijf</label>
+        <label class="linelabelRight">@Model.Departement.Omschrijving</label>
+    </div>
+
+</div>
+
+<div class="factuurbody">
+
+    @for (int i = 0; i < Model.FactuurDetails.Count(); i++)
+    {
+        Gebruiker gebruiker = Model.FactuurDetails[i].UurRegistratie.GebruikerKlant.GebruikerDepartement.Gebruiker;
+        UurRegistratie uurRegistratie = Model.FactuurDetails[i].UurRegistratie;
+        
+        <div class="uurregbox">
+            <span class="uurregtitel">@(i + 1). Uurregistratie - @(uurRegistratie.Titel)</span>
+            <br />            
+            <span>Omschrijving: @uurRegistratie.Omschrijving</span>
+            <br />
+            <span>Uitgevoerd door: @gebruiker.Voornaam @gebruiker.Achternaam</span>            
+            <ul class="top10 factuur">
+                @foreach (UurRegistratieDetail urDetail in uurRegistratie.UurRegistratieDetails)
+                {
+                    string aangerekendOfNiet = urDetail.TeFactureren ? "" : " - Niet aangerekend";
+                    <li>
+                        @urDetail.StartTijd - @urDetail.EindTijd - @urDetail.Tarief.TypeWerk - €@urDetail.Tarief.TariefUurWaarde / uur @aangerekendOfNiet
+                    </li>
+                }
+            </ul>
+            <span class="subtotaal">Subtotaal: €@Model.FactuurDetails[i].LijnWaarde</span>
+        </div>
+    }
+
+</div>
+
+<div class="factuurtotaal">
+    <span class="totaal">Totaal: €@Model.Factuur.Totaal</span>
+</div>
+
+@if(Model.TeBevestigen)
+{
+    <div class="row bottom10 top10">
+        <input type="hidden" id="hdn_id" value="@Model.Factuur.Id" />
+        <button id="btn_annuleren" class="right10 floatRight">Annuleren</button>
+        <button id="btn_bevestigen" class="right10 floatRight">Bevestigen</button>
+    </div>    
+}
+else
+{
+    <div class="row bottom10 top10">
+        <input type="hidden" id="hdn_depId" value="@Model.Departement.Id" />
+        <button id="btn_terug" class="right10 floatRight">Terug</button>
+    </div>
+}
+
+@Scripts.Render("~/Scripts/uurfac/factuurdetail.js")
+
+
+
+

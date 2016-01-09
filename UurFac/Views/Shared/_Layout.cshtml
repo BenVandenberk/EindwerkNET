@@ -1,0 +1,139 @@
+﻿@using UurFac.Models.Service
+@using UurFac.Models.Repo
+@using UurFac.Models.UurFac
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - UurFac</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/Scripts/jtable/themes/metro/crimson")
+    @Styles.Render("~/Content/validationEngine.jquery.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jtable")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.validationEngine.js")
+    @Scripts.Render("~/Scripts/jquery.validationEngine-nl.js")
+    @Scripts.Render("~/Scripts/uurfac/common.js")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("UurFac", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{
+                        GebruikerService gebruikerService = new GebruikerService(new UnitOfWork());
+                        Gebruiker loggedIn = gebruikerService.LoggedIn();
+
+                        Rol gebruikersRol = Rol.BEZOEKER;
+                        if (loggedIn != null)
+                        {
+                            gebruikersRol = loggedIn.Rol;
+                        }
+                    }
+                    @if (gebruikersRol == Rol.ADMINISTRATOR)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrator <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Gebruikers", "Index", "Gebruikers")</li>
+                                <li>@Html.ActionLink("Departementen", "Index", "Departements")</li>
+                                <li>@Html.ActionLink("Tarieven", "Index", "Tariefs")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Klanten <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Klanten", "Index", "Klants")</li>
+                                <li>@Html.ActionLink("Gebruiker / Klanten", "Index", "GebruikerKlants")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Uurregistraties <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ongefactureerd", "Index", "UurRegistraties", new { gefactureerd = false }, null)</li>
+                                <li>@Html.ActionLink("Gefactureerd", "Index", "UurRegistraties", new { gefactureerd = true }, null)</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facturen <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Factuur Creatie", "Create", "Factuurs")</li>
+                                <li>@Html.ActionLink("Facturen", "Index", "Factuurs")</li>
+                            </ul>
+                        </li>                                               
+                    }
+                    @if (gebruikersRol == Rol.DEPARTEMENT_ADMINISTRATOR)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Klanten <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Klanten", "Index", "Klants")</li>
+                                <li>@Html.ActionLink("Gebruiker / Klanten", "Index", "GebruikerKlants")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Uurregistraties <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ongefactureerd", "Index", "UurRegistraties", new { gefactureerd = false }, null)</li>
+                                <li>@Html.ActionLink("Gefactureerd", "Index", "UurRegistraties", new { gefactureerd = true }, null)</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facturen <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Factuur Creatie", "Create", "Factuurs")</li>
+                                <li>@Html.ActionLink("Facturen", "Index", "Factuurs")</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (gebruikersRol == Rol.USER)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Uurregistraties <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ongefactureerd", "Index", "UurRegistraties", new { gefactureerd = false }, null)</li>
+                                <li>@Html.ActionLink("Gefactureerd", "Index", "UurRegistraties", new { gefactureerd = true }, null)</li>
+                            </ul>
+                        </li>                        
+                    }
+
+                    <li>@Html.ActionLink("Developer", "ClassDiagram", "Developer")</li> 
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; Ben Vandenberk</p>
+        </footer>
+    </div>
+
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

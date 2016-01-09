@@ -1,0 +1,98 @@
+@model UurFac.Models.UurRegistratieViewModel
+@using UurFac.Models.Service
+@using UurFac.Models.Repo
+@using UurFac.Models.UurFac
+
+@{
+    ViewBag.Title = "Uurregistraties";
+
+    GebruikerService gebruikerService = new GebruikerService(new UnitOfWork());
+    Gebruiker loggedIn = gebruikerService.LoggedIn();
+
+    Rol gebruikersRol = Rol.BEZOEKER;
+    if (loggedIn != null)
+    {
+        gebruikersRol = loggedIn.Rol;
+    }
+
+    string hideClass = "";
+
+    if (gebruikersRol == Rol.USER)
+    {
+        hideClass = "hide";
+    }
+}
+
+<script type="text/javascript">
+    var url = '@Url.Action("Details", "UurRegistraties", new { uurRegistratieId = "__id__" })';
+
+    var gebKlantId = "";
+    var gebDepId = "";
+    var depId = "";
+    @if(ViewBag.GebruikerKlantId != null)
+    {
+        @:gebKlantId = @ViewBag.GebruikerKlantId;
+    }
+    @if(ViewBag.GebruikerDepartementId != null)
+    {
+        @:gebDepId = @ViewBag.GebruikerDepartementId;
+    }
+    @if(ViewBag.DepartementId != null)
+    {
+        @:depId = @ViewBag.DepartementId;
+    }
+</script>
+
+@if (Model.Gefactureerd)
+{
+    <h1>Gefactureerde Uurregistraties</h1>
+}
+else
+{
+    <h1>Ongefactureerde Uurregistraties</h1>
+}
+
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    @if (Model.Gefactureerd)
+    {
+        <p>
+            Op deze pagina ziet u enkel de reeds gefactureerde uurregistraties. U kan deze registraties enkel bezichtigen, niet meer aanpassen.
+        </p>
+    }
+    else
+    {
+        <p>
+            Op deze pagina kan u Uurregistraties aanmaken. U ziet klanten die met uw departementen en uzelf / uw gebruikers  gelinkt zijn. Selecteer een klant en klik op 'Toevoegen' in de onderste
+            tabel om een uurregistratie aan te maken. Klik vervolgens op de 'Detail' knop om geleverde prestaties toe te voegen aan de uurregistratie.
+        </p>
+    }    
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.GekozenDepartement)
+</div>
+<div class="editor-field selDep">
+    @Html.DropDownListFor(model => model.GekozenDepartement, Model.Departementen)
+</div>
+
+<div class="editor-label top10 @hideClass">
+    @Html.Label("Gebruiker")
+</div>
+<div class="editor-field selDep @hideClass">
+    <select id="sel_gebruikers" name="gebruikers"></select>
+</div>
+
+<div id="tbl_klanten" class="tabelOnder"></div>
+
+<div id="tbl_uurregistraties" class="tabelOnder"></div>
+
+@if (Model.Gefactureerd)
+{
+    @Scripts.Render("~/Scripts/uurfac/uurregistratiesgefactureerd.js")
+}
+else
+{
+    @Scripts.Render("~/Scripts/uurfac/uurregistratie.js")
+}

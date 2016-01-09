@@ -1,0 +1,24 @@
+@{
+    ViewBag.Title = "Departementen";
+}
+
+
+<h1>Departementen</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    <p>
+        Op deze pagina kan u Departementen beheren. Gebruikers kunnen pas uurregistraties maken als ze gekoppeld zijn aan een departement, en dan enkel voor de klanten die ook gekoppeld zijn aan dat departement.
+        Koppelen van departementen kan voor
+        <ul>
+            <li>Gebruikers op Administrator > @Html.ActionLink("Gebruikers", "Index", "Gebruikers")</li>
+            <li>Klanten op Klanten > @Html.ActionLink("Klanten", "Index", "Klants")</li>
+        </ul>
+    </p>
+</div>
+
+<div id="tbl_departement"></div>
+
+@Scripts.Render("~/Scripts/uurfac/departementen.js")
+
+

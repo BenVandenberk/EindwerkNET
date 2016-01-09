@@ -1,0 +1,79 @@
+@{
+    ViewBag.Title = "Factuur Creatie";
+}
+
+<script type="text/javascript">
+    var url = '@Url.Action("Factureer", "Factuurs")';
+    var errorMessage = "";
+    @if(ViewBag.Error != null)
+    {
+        @:errorMessage = '@ViewBag.Error';
+    }
+</script>
+
+<h1>Factuur Creatie</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    <p>
+        Op deze pagina kan u facturen aanmaken voor uurregistraties. Kies een departement en een klant en klik op 'Toon Uurregistraties' om alle niet gefactureerde 
+        uurregistraties te zien voor de klant. U kan de zoekopdracht verfijnen op basis van een startdatum en/of einddatum. Selecteer vervolgens in onderstaande 
+        tabel de uurregistraties die u wil factureren en klik op 'Factureer Selectie'. U krijgt de factuur te zien en kan deze nog bevestigen of annuleren.
+    </p>
+</div>
+
+<form id="frm_factuurCreate">
+
+    <div class="row">
+        <div class="col-lg-2">
+            Departement*
+        </div>
+        <div class="col-lg-2">
+            <select id="sel_departement" name="departement"></select>
+        </div>
+    </div>
+
+    <div class="row top10">
+        <div class="col-lg-2">
+            Klant*
+        </div>
+        <div class="col-lg-2">
+            <input id="sel_klanten" name="klant"/>
+        </div>
+    </div>
+
+    <div class="row top10">
+        <div class="col-lg-2">
+            Van datum
+        </div>
+        <div class="col-lg-2">
+            <input id="in_van" name="van" class="selDate" />
+        </div>
+    </div>
+
+    <div class="row top10">
+        <div class="col-lg-2">
+            Tot datum
+        </div>
+        <div class="col-lg-2">
+            <input id="in_tot" name="tot" class="selDate" />
+        </div>
+    </div>
+
+</form>
+
+<div class="row top10">
+    <div class="col-lg-4">
+        <button id="btn_toon">Toon Uurregistraties</button>
+    </div>
+</div>
+
+<div id="tbl_uurregistraties" class="tabelOnder"></div>
+
+<div class="row top10 right10">
+    <button class="floatRight" id="btn_factureer">Factureer Selectie</button>
+</div>
+
+@Scripts.Render("~/Scripts/uurfac/factuurcreatie.js")
+
+

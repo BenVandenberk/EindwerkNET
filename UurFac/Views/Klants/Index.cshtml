@@ -1,0 +1,122 @@
+@model UurFac.Models.KlantViewModel
+@using UurFac.Models.UurFac
+
+@{
+    ViewBag.Title = "Klanten";
+}
+
+<h1>Klanten</h1>
+<img src="~/Content/images/question-mark2.png" id="img_help" />
+
+<div id="div_help">
+    <p>
+        Op deze pagina kan u de Klanten beheren. Opdat een gebruiker uurregistraties kan aanmaken voor een klant, moet deze klant eerst gekoppeld zijn aan 
+        het departement van de gebruiker. Een klant moet te allen tijde minstens aan één departement verbonden zijn.<br /><br />
+
+        Koppelen van gebruikers kan voor
+        <ul>
+            <li>Departementen op Administrator > @Html.ActionLink("Gebruikers", "Index", "Gebruikers") (Enkel als Administrator)</li>
+            <li>Klanten op Klanten > @Html.ActionLink("Gebruiker / Klanten", "Index", "GebruikerKlants")</li>
+        </ul>
+
+        Administrators hebben volledige rechten op alle klanten, van alle departementen.<br />
+        Departement administrators kunnen alleen klanten beheren voor hun eigen departementen.
+    </p>
+</div>
+
+
+@using (Ajax.BeginForm(new AjaxOptions()
+{
+    HttpMethod = "POST",
+    Url = "/Klants/Create",
+    OnComplete = "reloadKlanten()",
+    OnSuccess = "successHandler"
+}))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Nieuwe Klant</legend>
+
+        <div class="row">           
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Klant.Bedrijfsnaam)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Klant.Bedrijfsnaam, new { htmlAttributes = new { @class = "wide" } })<br />
+                    @Html.ValidationMessageFor(model => model.Klant.Bedrijfsnaam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Klant.Ondernemingsnummer)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Klant.Ondernemingsnummer)<br />
+                    @Html.ValidationMessageFor(model => model.Klant.Ondernemingsnummer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.GekozenDepartement)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.GekozenDepartement, Model.Departementen)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row top10">
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Klant.Adres)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Klant.Adres, new { htmlAttributes = new { @class = "wide" } })<br />
+                    @Html.ValidationMessageFor(model => model.Klant.Adres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Klant.Postcode)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Klant.Postcode)<br />
+                    @Html.ValidationMessageFor(model => model.Klant.Postcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Klant.Plaats)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Klant.Plaats)<br />
+                    @Html.ValidationMessageFor(model => model.Klant.Plaats, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>  
+
+        <p>
+             <input type="submit" value="Creëer Klant" class="formButton" id="btn_maak"/>
+        </p>
+</fieldset>
+}
+
+<div id="tbl_klanten"></div>
+
+<p></p>
+
+<div id="tbl_departementen" class="tabelOnder"></div>
+
+@Scripts.Render("~/Scripts/uurfac/klanten.js")
+
+
+

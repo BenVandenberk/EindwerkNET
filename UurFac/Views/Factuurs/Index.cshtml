@@ -1,0 +1,37 @@
+@{
+    ViewBag.Title = "Facturen";
+}
+
+<script type="text/javascript">
+    var url = '@Url.Action("Details", "Factuurs", new {id = "__id__" })';
+
+    var errorMessage = "";
+    @if(ViewBag.Error != null)
+    {
+        @:errorMessage = '@ViewBag.Error';
+        }
+
+    var id = "";
+    @if(ViewBag.DepId != null)
+    {
+        @:id = @ViewBag.DepId;
+    }
+</script>
+
+<h1>Facturen</h1>
+
+<div class="row">
+    <div class="col-lg-2">
+        Departement
+    </div>
+    <div class="col-lg-2">
+        <select id="sel_departement" name="departement"></select>
+    </div>
+</div>
+
+<div id="tbl_facturen" class="tabelOnder"></div>  
+
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/uurfac/facturen.js")
+
+
